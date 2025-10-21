@@ -601,7 +601,7 @@
             // Check credentials
             if (users[email] && users[email].password === password) {
                 currentUser = users[email];
-                document.getElementById('userWelcome').textContent = Welcome, ${currentUser.name}!;
+                document.getElementById('userWelcome').textContent = `Welcome, ${currentUser.name}!`;
                 
                 // Set the user's preferred currency
                 updateCurrencyDisplay(currentUser.currency);
@@ -618,7 +618,7 @@
             const currency = currencies[currencyCode];
             if (currency) {
                 document.getElementById('currentCurrencyFlag').textContent = currency.flag;
-                document.getElementById('currentCurrencyCode').textContent = ${currencyCode} (${currency.symbol});
+                document.getElementById('currentCurrencyCode').textContent = `${currencyCode} (${currency.symbol})`;
                 document.getElementById('currentCurrencyName').textContent = currency.name;
             }
         }
@@ -633,7 +633,7 @@
                 localStorage.setItem('agriTechUsers', JSON.stringify(users));
                 updateCurrencyDisplay(currencyCode);
                 document.getElementById('costCurrency').value = currencyCode;
-                alert(Currency changed to ${currencies[currencyCode].name});
+                alert(`Currency changed to ${currencies[currencyCode].name}`);
             } else if (newCurrency) {
                 alert('Invalid currency code. Please use one of the available options.');
             }
@@ -712,7 +712,7 @@
             recommendations.innerHTML = `
                 <h4>Recommended Crops for ${soilType.charAt(0).toUpperCase() + soilType.slice(1)} Soil</h4>
                 <ul class="crop-list">
-                    ${crops.map(crop => <li>${crop}</li>).join('')}
+                    ${crops.map(crop => `<li>${crop}</li>`).join('')}
                 </ul>
                 <p><strong>Land Size:</strong> ${landSize} acres</p>
             `;

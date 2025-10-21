@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUT Smart Agri-Tech Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            color: #2a7c2a;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2a7c2a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        h3 {
+            color: #3a9c3a;
+            margin: 15px 0 10px;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #2a7c2a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e5d1e;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: #28a745;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .output {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 4px solid #2a7c2a;
+        }
+
+        .requirements {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .soil-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .soil-card {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .crop-list {
+            list-style-type: none;
+            margin-top: 10px;
+        }
+
+        .crop-list li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .cost-summary {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .user-welcome {
+            font-size: 1.2rem;
+            color: #2a7c2a;
+            margin-bottom: 20px;
+        }
+
+        .currency-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f0f8f0;
+            border-radius: 5px;
+        }
+
+        .currency-flag {
+            font-size: 1.5rem;
+        }
+
+        .currency-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .currency-symbol {
+            font-weight: bold;
+            color: #2a7c2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌾 TUT Smart Agri-Tech Portal</h1>
+            <p>Smart farming solutions for modern agriculture</p>
+        </header>
+
+        <!-- Main Menu -->
+        <div id="mainMenu" class="card">
+            <h2>Main Menu</h2>
+            <div class="menu">
+                <button class="btn" onclick="showSection('loginSection')">Login</button>
+                <button class="btn" onclick="showSection('signupSection')">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Login Section -->
+        <div id="loginSection" class="card hidden">
+            <h2>🔐 Login</h2>
+            <div class="form-group">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+                <div id="loginEmailError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+                <div id="loginPasswordError" class="error"></div>
+            </div>
+            <button class="btn" onclick="login()">Login</button>
+            <p style="margin-top: 15px;">Don't have an account? <a href="#" onclick="showSection('signupSection')">Sign Up</a></p>
+        </div>
+
+        <!-- Sign Up Section -->
+        <div id="signupSection" class="card hidden">
+            <h2>📝 Sign Up</h2>
+            <div class="form-group">
+                <label for="signupName">Full Name:</label>
+                <input type="text" id="signupName" placeholder="Enter your full name">
+                <div id="signupNameError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email:</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email">
+                <div id="signupEmailError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" placeholder="Create a password">
+                <div class="requirements">
+                    Password Requirements:
+                    <ul>
+                        <li>At least 8 characters</li>
+                        <li>At least one uppercase letter</li>
+                        <li>At least one special character (!@#$%^&* etc.)</li>
+                    </ul>
+                </div>
+                <div id="signupPasswordError" class="error"></div>
+            </div>
+            
+            <!-- Currency Selection in Sign Up -->
+            <div class="form-group">
+                <label for="signupCurrency">Preferred Currency:</label>
+                <select id="signupCurrency">
+                    <option value="USD">🇺🇸 US Dollar (USD)</option>
+                    <option value="EUR">🇪🇺 Euro (EUR)</option>
+                    <option value="GBP">🇬🇧 British Pound (GBP)</option>
+                    <option value="ZAR">🇿🇦 South African Rand (ZAR)</option>
+                    <option value="INR">🇮🇳 Indian Rupee (INR)</option>
+                    <option value="AUD">🇦🇺 Australian Dollar (AUD)</option>
+                    <option value="CAD">🇨🇦 Canadian Dollar (CAD)</option>
+                    <option value="JPY">🇯🇵 Japanese Yen (JPY)</option>
+                    <option value="CNY">🇨🇳 Chinese Yuan (CNY)</option>
+                    <option value="NGN">🇳🇬 Nigerian Naira (NGN)</option>
+                    <option value="KES">🇰🇪 Kenyan Shilling (KES)</option>
+                    <option value="GHS">🇬🇭 Ghanaian Cedi (GHS)</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="signup()">Sign Up</button>
+            <p style="margin-top: 15px;">Already have an account? <a href="#" onclick="showSection('loginSection')">Login</a></p>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="hidden">
+            <div class="card">
+                <div class="dashboard-actions">
+                    <h2>Farm Dashboard</h2>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </div>
+                <div id="userWelcome" class="user-welcome"></div>
+                
+                <!-- Currency Display and Change Option -->
+                <div class="currency-selector">
+                    <div>
+                        <strong>Current Currency:</strong>
+                        <div class="currency-info">
+                            <span id="currentCurrencyFlag" class="currency-flag"></span>
+                            <span id="currentCurrencyCode" class="currency-symbol"></span>
+                            <span id="currentCurrencyName"></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="showCurrencyChange()">Change Currency</button>
+                </div>
+            </div>
+
+            <!-- Soil Information -->
+            <div class="card">
+                <h3>🌱 Soil Information</h3>
+                <button class="btn" onclick="viewSoilInfo()">View Soil Types</button>
+                <div id="soilInfo" class="output hidden"></div>
+            </div>
+
+            <!-- Crop Planning Tool -->
+            <div class="card">
+                <h3>🌾 Farm Crop Planning Tool</h3>
+                <div class="form-group">
+                    <label for="landSize">Land Size (acres):</label>
+                    <input type="number" id="landSize" placeholder="Enter land size in acres" min="0.1" step="0.1">
+                    <div id="landSizeError" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="soilType">Soil Type:</label>
+                    <select id="soilType">
+                        <option value="">Select Soil Type</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="loamy">Loamy</option>
+                        <option value="clay">Clay</option>
+                    </select>
+                    <div id="soilTypeError" class="error"></div>
+                </div>
+                <button class="btn" onclick="getCropRecommendations()">Get Crop Recommendations</button>
+                <div id="cropRecommendations" class="output hidden"></div>
+            </div>
+
+            <!-- Cost Calculator -->
+            <div class="card">
+                <h3>💰 Calculate Planting Costs</h3>
+                
+                <!-- Currency Selection for Cost Calculation -->
+                <div class="form-group">
+                    <label for="costCurrency">Currency for Calculation:</label>
+                    <select id="costCurrency">
+                        <option value="USD">🇺🇸 US Dollar (USD)</option>
+                        <option value="EUR">🇪🇺 Euro (EUR)</option>
+                        <option value="GBP">🇬🇧 British Pound (GBP)</option>
+                        <option value="ZAR">🇿🇦 South African Rand (ZAR)</option>
+                        <option value="INR">🇮🇳 Indian Rupee (INR)</option>
+                        <option value="AUD">🇦🇺 Australian Dollar (AUD)</option>
+                        <option value="CAD">🇨🇦 Canadian Dollar (CAD)</option>
+                        <option value="JPY">🇯🇵 Japanese Yen (JPY)</option>
+                        <option value="CNY">🇨🇳 Chinese Yuan (CNY)</option>
+                        <option value="NGN">🇳🇬 Nigerian Naira (NGN)</option>
+                        <option value="KES">🇰🇪 Kenyan Shilling (KES)</option>
+                        <option value="GHS">🇬🇭 Ghanaian Cedi (GHS)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="seedCost">Seed Cost (per acre):</label>
+                    <input type="number" id="seedCost" placeholder="Enter seed cost" min="0" step="0.01">
+                    <div id="seedCostError" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="fertilizerCost">Fertilizer Cost (per acre):</label>
+                    <input type="number" id="fertilizerCost" placeholder="Enter fertilizer cost" min="0" step="0.01">
+                    <div id="fertilizerCostError" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="laborCost">Labor Cost (per acre):</label>
+                    <input type="number" id="laborCost" placeholder="Enter labor cost" min="0" step="0.01">
+                    <div id="laborCostError" class="error"></div>
+                </div>
+                <button class="btn" onclick="calculateCosts()">Calculate Total Cost</button>
+                <div id="costOutput" class="output hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // User storage (simulating a database)
+        let users = JSON.parse(localStorage.getItem('agriTechUsers')) || {};
+        let currentUser = null;
+        
+        // Currency data with symbols and flags
+        const currencies = {
+            'USD': { symbol: '$', name: 'US Dollar', flag: '🇺🇸' },
+            'EUR': { symbol: '€', name: 'Euro', flag: '🇪🇺' },
+            'GBP': { symbol: '£', name: 'British Pound', flag: '🇬🇧' },
+            'ZAR': { symbol: 'R', name: 'South African Rand', flag: '🇿🇦' },
+            'INR': { symbol: '₹', name: 'Indian Rupee', flag: '🇮🇳' },
+            'AUD': { symbol: 'A$', name: 'Australian Dollar', flag: '🇦🇺' },
+            'CAD': { symbol: 'C$', name: 'Canadian Dollar', flag: '🇨🇦' },
+            'JPY': { symbol: '¥', name: 'Japanese Yen', flag: '🇯🇵' },
+            'CNY': { symbol: '¥', name: 'Chinese Yuan', flag: '🇨🇳' },
+            'NGN': { symbol: '₦', name: 'Nigerian Naira', flag: '🇳🇬' },
+            'KES': { symbol: 'KSh', name: 'Kenyan Shilling', flag: '🇰🇪' },
+            'GHS': { symbol: 'GH₵', name: 'Ghanaian Cedi', flag: '🇬🇭' }
+        };
+
+        // Show/hide sections
+        function showSection(sectionId) {
+            document.getElementById('mainMenu').classList.add('hidden');
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('signupSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Clear errors when switching sections
+            clearErrors();
+        }
+
+        // Clear all error messages
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error');
+            errorElements.forEach(element => {
+                element.textContent = '';
+            });
+        }
+
+        // Validation functions
+        function checkName(name) {
+            if (name.length < 2 || name.length > 50) {
+                return false;
+            }
+            
+            for (let i = 0; i < name.length; i++) {
+                const ch = name.charAt(i);
+                if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch === ' ')) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function checkEmail(email) {
+            const atPosition = email.indexOf('@');
+            if (atPosition <= 0) {
+                return false;
+            }
+            
+            const dotPosition = email.indexOf('.', atPosition + 1);
+            if (dotPosition === -1) {
+                return false;
+            }
+            
+            if (dotPosition === email.length - 1) {
+                return false;
+            }
+            
+            return true;
+        }
+
+        function checkPassword(password) {
+            if (password.length < 8) {
+                return false;
+            }
+            
+            let hasUppercase = false;
+            let hasSpecial = false;
+            const specialChars = "!@#$%^&*()-_=+[]{};:'\",.<>/?\\|`~";
+            
+            for (let i = 0; i < password.length; i++) {
+                const ch = password.charAt(i);
+                if (ch >= 'A' && ch <= 'Z') {
+                    hasUppercase = true;
+                }
+                
+                for (let j = 0; j < specialChars.length; j++) {
+                    if (ch === specialChars.charAt(j)) {
+                        hasSpecial = true;
+                        break;
+                    }
+                }
+            }
+            
+            return hasUppercase && hasSpecial;
+        }
+
+        function checkPositiveNumber(input) {
+            if (input === '') {
+                return false;
+            }
+            
+            const num = parseFloat(input);
+            return !isNaN(num) && num > 0;
+        }
+
+        // Sign up function
+        function signup() {
+            clearErrors();
+            
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const currency = document.getElementById('signupCurrency').value;
+            
+            let isValid = true;
+            
+            // Validate name
+            if (!name) {
+                document.getElementById('signupNameError').textContent = 'Full name is required';
+                isValid = false;
+            } else if (!checkName(name)) {
+                document.getElementById('signupNameError').textContent = 'Name must be 2-50 characters and contain only letters and spaces';
+                isValid = false;
+            }
+            
+            // Validate email
+            if (!email) {
+                document.getElementById('signupEmailError').textContent = 'Email is required';
+                isValid = false;
+            } else if (!checkEmail(email)) {
+                document.getElementById('signupEmailError').textContent = 'Invalid email format';
+                isValid = false;
+            } else if (users[email]) {
+                document.getElementById('signupEmailError').textContent = 'Email already registered';
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!password) {
+                document.getElementById('signupPasswordError').textContent = 'Password is required';
+                isValid = false;
+            } else if (!checkPassword(password)) {
+                document.getElementById('signupPasswordError').textContent = 'Password does not meet requirements';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Create user account
+            users[email] = {
+                name: name,
+                email: email,
+                password: password,
+                currency: currency
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('agriTechUsers', JSON.stringify(users));
+            
+            alert('Account created successfully! Please login.');
+            showSection('loginSection');
+        }
+
+        // Login function
+        function login() {
+            clearErrors();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            let isValid = true;
+            
+            // Validate email
+            if (!email) {
+                document.getElementById('loginEmailError').textContent = 'Email is required';
+                isValid = false;
+            } else if (!checkEmail(email)) {
+                document.getElementById('loginEmailError').textContent = 'Invalid email format';
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!password) {
+                document.getElementById('loginPasswordError').textContent = 'Password is required';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Check credentials
+            if (users[email] && users[email].password === password) {
+                currentUser = users[email];
+                document.getElementById('userWelcome').textContent = Welcome, ${currentUser.name}!;
+                
+                // Set the user's preferred currency
+                updateCurrencyDisplay(currentUser.currency);
+                document.getElementById('costCurrency').value = currentUser.currency;
+                
+                showSection('dashboardSection');
+            } else {
+                document.getElementById('loginPasswordError').textContent = 'Invalid email or password';
+            }
+        }
+
+        // Update currency display
+        function updateCurrencyDisplay(currencyCode) {
+            const currency = currencies[currencyCode];
+            if (currency) {
+                document.getElementById('currentCurrencyFlag').textContent = currency.flag;
+                document.getElementById('currentCurrencyCode').textContent = ${currencyCode} (${currency.symbol});
+                document.getElementById('currentCurrencyName').textContent = currency.name;
+            }
+        }
+
+        // Show currency change option
+        function showCurrencyChange() {
+            const newCurrency = prompt('Enter new currency code (USD, EUR, GBP, ZAR, INR, etc.):', currentUser.currency);
+            if (newCurrency && currencies[newCurrency.toUpperCase()]) {
+                const currencyCode = newCurrency.toUpperCase();
+                currentUser.currency = currencyCode;
+                users[currentUser.email].currency = currencyCode;
+                localStorage.setItem('agriTechUsers', JSON.stringify(users));
+                updateCurrencyDisplay(currencyCode);
+                document.getElementById('costCurrency').value = currencyCode;
+                alert(Currency changed to ${currencies[currencyCode].name});
+            } else if (newCurrency) {
+                alert('Invalid currency code. Please use one of the available options.');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            showSection('mainMenu');
+        }
+
+        // View soil information
+        function viewSoilInfo() {
+            const soilInfo = document.getElementById('soilInfo');
+            soilInfo.innerHTML = `
+                <div class="soil-info">
+                    <div class="soil-card">
+                        <h4>Sandy Soil</h4>
+                        <p>Coarse, gritty texture</p>
+                        <p><strong>Good for:</strong> Root vegetables</p>
+                    </div>
+                    <div class="soil-card">
+                        <h4>Loamy Soil</h4>
+                        <p>Balanced, fertile</p>
+                        <p><strong>Good for:</strong> Most crops</p>
+                    </div>
+                    <div class="soil-card">
+                        <h4>Clay Soil</h4>
+                        <p>Dense, sticky</p>
+                        <p><strong>Good for:</strong> Water-loving plants</p>
+                    </div>
+                </div>
+            `;
+            soilInfo.classList.remove('hidden');
+        }
+
+        // Get crop recommendations
+        function getCropRecommendations() {
+            clearErrors();
+            
+            const landSize = document.getElementById('landSize').value;
+            const soilType = document.getElementById('soilType').value;
+            
+            let isValid = true;
+            
+            // Validate land size
+            if (!landSize) {
+                document.getElementById('landSizeError').textContent = 'Land size is required';
+                isValid = false;
+            } else if (!checkPositiveNumber(landSize)) {
+                document.getElementById('landSizeError').textContent = 'Land size must be a positive number';
+                isValid = false;
+            }
+            
+            // Validate soil type
+            if (!soilType) {
+                document.getElementById('soilTypeError').textContent = 'Soil type is required';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Get recommendations based on soil type
+            let crops = [];
+            if (soilType === 'sandy') {
+                crops = ['Carrots', 'Peanuts', 'Potatoes'];
+            } else if (soilType === 'loamy') {
+                crops = ['Wheat', 'Soybeans', 'Corn'];
+            } else if (soilType === 'clay') {
+                crops = ['Rice', 'Broccoli', 'Cabbage'];
+            }
+            
+            const recommendations = document.getElementById('cropRecommendations');
+            recommendations.innerHTML = `
+                <h4>Recommended Crops for ${soilType.charAt(0).toUpperCase() + soilType.slice(1)} Soil</h4>
+                <ul class="crop-list">
+                    ${crops.map(crop => <li>${crop}</li>).join('')}
+                </ul>
+                <p><strong>Land Size:</strong> ${landSize} acres</p>
+            `;
+            recommendations.classList.remove('hidden');
+        }
+
+        // Calculate costs
+        function calculateCosts() {
+            clearErrors();
+            
+            const landSize = document.getElementById('landSize').value;
+            const seedCost = document.getElementById('seedCost').value;
+            const fertilizerCost = document.getElementById('fertilizerCost').value;
+            const laborCost = document.getElementById('laborCost').value;
+            const currencyCode = document.getElementById('costCurrency').value;
+            const currency = currencies[currencyCode];
+            
+            let isValid = true;
+            
+            // Validate all inputs
+            if (!landSize) {
+                document.getElementById('landSizeError').textContent = 'Land size is required';
+                isValid = false;
+            } else if (!checkPositiveNumber(landSize)) {
+                document.getElementById('landSizeError').textContent = 'Land size must be a positive number';
+                isValid = false;
+            }
+            
+            if (!seedCost) {
+                document.getElementById('seedCostError').textContent = 'Seed cost is required';
+                isValid = false;
+            } else if (!checkPositiveNumber(seedCost)) {
+                document.getElementById('seedCostError').textContent = 'Seed cost must be a positive number';
+                isValid = false;
+            }
+            
+            if (!fertilizerCost) {
+                document.getElementById('fertilizerCostError').textContent = 'Fertilizer cost is required';
+                isValid = false;
+            } else if (!checkPositiveNumber(fertilizerCost)) {
+                document.getElementById('fertilizerCostError').textContent = 'Fertilizer cost must be a positive number';
+                isValid = false;
+            }
+            
+            if (!laborCost) {
+                document.getElementById('laborCostError').textContent = 'Labor cost is required';
+                isValid = false;
+            } else if (!checkPositiveNumber(laborCost)) {
+                document.getElementById('laborCostError').textContent = 'Labor cost must be a positive number';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Calculate total cost
+            const totalCost = (parseFloat(seedCost) + parseFloat(fertilizerCost) + parseFloat(laborCost)) * parseFloat(landSize);
+            
+            const costOutput = document.getElementById('costOutput');
+            costOutput.innerHTML = `
+                <div class="cost-summary">
+                    <h4>Cost Summary ${currency.flag}</h4>
+                    <p><strong>Currency:</strong> ${currency.name} (${currencyCode})</p>
+                    <p><strong>Land Size:</strong> ${landSize} acres</p>
+                    <p><strong>Seed Cost:</strong> ${currency.symbol}${parseFloat(seedCost).toFixed(2)}/acre</p>
+                    <p><strong>Fertilizer Cost:</strong> ${currency.symbol}${parseFloat(fertilizerCost).toFixed(2)}/acre</p>
+                    <p><strong>Labor Cost:</strong> ${currency.symbol}${parseFloat(laborCost).toFixed(2)}/acre</p>
+                    <p><strong>Total Cost:</strong> ${currency.symbol}${totalCost.toFixed(2)}</p>
+                </div>
+            `;
+            costOutput.classList.remove('hidden');
+        }
+
+        // Initialize the application
+        function init() {
+            showSection('mainMenu');
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+</html>
